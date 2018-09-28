@@ -4,8 +4,8 @@ import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.MouseEvent;
 import com.harium.etyl.commons.event.PointerEvent;
+import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.View;
 import com.harium.etyl.ui.theme.Theme;
 
@@ -20,25 +20,24 @@ public class BaseSlider extends View {
     protected float value = 0;
     protected boolean activated = false;
 
-    protected View button;
+    protected GeometricLayer knob;
 
     public BaseSlider(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        buildButton();
+        buildKnob();
         deactivate();
-        sliderPosition = getX() - button.getW() / 2;
-        button.setX(sliderPosition);
+        sliderPosition = 0;
     }
 
-    public void buildButton() {
-        button = new Button(x, y, h / 4, h);
+    public void buildKnob() {
+        knob = new GeometricLayer(0, 0, h / 4, h);
     }
 
-    public void rebuild() {
-        button.rebuild();
+    /*public void rebuild() {
+        buildKnob();
         button.setX(sliderPosition);
-    }
+    }*/
 
     @Override
     public GUIEvent updateMouse(PointerEvent event) {
@@ -61,8 +60,6 @@ public class BaseSlider extends View {
             }
         }
 
-        button.setMouseOver(mouseOver);
-
         return value;
     }
 
@@ -81,15 +78,11 @@ public class BaseSlider extends View {
 
         if (value < minValue) {
             value = minValue;
-            sliderPosition = getX() - button.getW() / 2;
         } else if (value > maxValue) {
             value = maxValue;
-            sliderPosition = getX() + getW() - button.getW() / 2;
-        } else {
-            sliderPosition = event.getX() - button.getW() / 2;
         }
 
-        button.setX(sliderPosition);
+        sliderPosition = mx;
     }
 
     @Override
@@ -105,14 +98,13 @@ public class BaseSlider extends View {
 
         //Draw Slide
         Theme theme = getTheme();
-
         g.setColor(theme.getBarColor());
 
         int sh = h / 5;
         g.fillRect(x, y + h / 2 - sh / 2, w, sh);
 
-        //Draw Button
-        button.draw(g);
+        //Draw Rect Knob
+        g.fillRect(x + sliderPosition - knob.getW() / 2, y + knob.getY(), knob.getW(), knob.getH());
     }
 
     public float getMinValue() {
@@ -136,14 +128,11 @@ public class BaseSlider extends View {
     }
 
     public void setValue(float value) {
-
         this.value = value;
-
         float interval = maxValue - minValue;
-
         float bx = x + ((value * w) / interval);
 
-        button.setX((int) bx - button.getW() / 2);
+        sliderPosition = (int) (bx - knob.getW() / 2);
     }
 
     @Override

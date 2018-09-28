@@ -15,14 +15,14 @@ public class IntegerSpinner extends Spinner<Integer> {
 
     @Override
     public void add() {
-        if (value.intValue() < maxValue) {
+        if (value.intValue() + step.intValue()<= maxValue) {
             this.value = value.intValue() + step.intValue();
         }
     }
 
     @Override
     public void subtract() {
-        if (value.intValue() > minValue) {
+        if (value.intValue() - step.intValue() >= minValue) {
             this.value = value.intValue() - step.intValue();
         }
     }

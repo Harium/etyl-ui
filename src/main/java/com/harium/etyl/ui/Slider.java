@@ -17,10 +17,10 @@ public class Slider extends UIView {
     }
 
     public void rebuild() {
-        BaseSlider view = ThemeManager.getInstance().getTheme().createSlider(x, y, w, h);
-        view.copy(delegatedView);
+        slider = ThemeManager.getInstance().getTheme().createSlider(x, y, w, h);
+        slider.copy(delegatedView);
 
-        delegateView(view);
+        delegateView(slider);
     }
 
     public int getMinValue() {

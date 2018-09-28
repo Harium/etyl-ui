@@ -43,7 +43,6 @@ public abstract class Spinner<T extends Number> extends View {
     }
 
     private void configureButtons() {
-
         int border = 1;
         int buttonWidth = w / 6;
 
@@ -179,7 +178,7 @@ public abstract class Spinner<T extends Number> extends View {
         plus.setBounds(x + w - buttonWidth - border, y + border, buttonWidth, h / 2 - border);
         minus.setBounds(x + w - buttonWidth - border, y + h / 2 + border, buttonWidth, h / 2 - border * 2);
 
-        currentValue.setBounds(x, y + h / 2 - 10, w - buttonWidth, h / 2 - 10);
+        currentValue.setBounds(x, y, w - buttonWidth, h);
     }
 
 }

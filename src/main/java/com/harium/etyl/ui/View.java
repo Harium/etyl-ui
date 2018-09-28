@@ -156,7 +156,6 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
     }
 
     private void translateComponent(int x, int y, View component) {
-
         component.setLocation(x, y);
 
         for (View child : component.views) {
@@ -211,11 +210,11 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
         }
 
         return null;
-
     }
 
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
+        setW(width);
+        setH(height);
     }
 
     public GUIEvent updateMouse(PointerEvent event) {

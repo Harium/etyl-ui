@@ -21,10 +21,10 @@ public class Button extends UIView {
     }
 
     public void rebuild() {
-        BaseButton view = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
-        view.copy(delegatedView);
+        button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
+        button.copy(delegatedView);
 
-        delegateView(view);
+        delegateView(button);
     }
 
     public String getAlt() {

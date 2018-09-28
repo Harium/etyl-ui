@@ -52,6 +52,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     public static List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
     private static List<View> views = new ArrayList<View>();
+    private static List<View> draws = new ArrayList<View>();
 
     private UI() {
         super();
@@ -346,7 +347,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawUIViews(Graphics g) {
-        Iterator<View> componentIterator = views.listIterator();
+        Iterator<View> componentIterator = draws.listIterator();
 
         while (componentIterator.hasNext()) {
             View child = componentIterator.next();
@@ -358,7 +359,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public void updateMouse(PointerEvent event) {
         mx = event.getX();
         my = event.getY();
-        updateMouseViews(event, views);
+        updateMouseViews(event, UI.views);
     }
 
     public void updateKeyboard(KeyEvent event) {
@@ -443,18 +444,27 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     public static void add(View view) {
         UI.views.add(view);
+        UI.draws.add(view);
+    }
+
+    public static void handle(View view) {
+        // Do not draw
+        UI.views.add(view);
     }
 
     public static void addAll(List<View> views) {
         UI.views.addAll(views);
+        UI.draws.addAll(views);
     }
 
     public static void remove(View view) {
         UI.views.remove(view);
+        UI.draws.remove(view);
     }
 
     public static void clear() {
         UI.views.clear();
+        UI.draws.clear();
     }
 
     private boolean isUpdating() {

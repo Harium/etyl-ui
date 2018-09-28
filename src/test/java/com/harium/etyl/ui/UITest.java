@@ -73,4 +73,16 @@ public class UITest {
         UI.getInstance().updateMouse(move);
         Assert.assertNotEquals(button, UI.getInstance().getMouseOver());
     }
+
+    @Test
+    public void testResize() {
+        Button view = new Button(0, 0, 10, 10);
+        view.setLocation(10, 11);
+        view.resize(200, 201);
+        Assert.assertEquals(10, view.getX());
+        Assert.assertEquals(11, view.getY());
+        Assert.assertEquals(200, view.getW());
+        Assert.assertEquals(201, view.getH());
+    }
+
 }

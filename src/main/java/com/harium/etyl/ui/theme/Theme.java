@@ -17,7 +17,7 @@ public abstract class Theme implements ThemeFactory, LanguageChangeListener {
 
     private int fontSize = 14;
     private FontStyle fontStyle = FontStyle.PLAIN;
-    private String fontName;
+    private String fontName = "";
 
     private Style style = new Style();
 
