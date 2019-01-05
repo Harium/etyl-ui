@@ -309,10 +309,11 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawCursor(Graphics g) {
+        // Update Arraw Location
+        arrowDrawer.setLocation(mx, my);
         if (!drawCursor) {
             return;
         }
-        arrowDrawer.setLocation(mx, my);
         // Draw Timed Cursor Information
         if (timerClick && overClickable) {
             arrowDrawer.drawTimedIndicator(g, timerClickAmount);
@@ -411,7 +412,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         drawUIViews(g);
 
         //Draw Cursor
-        if (context.isDrawCursor()) {
+        if (context.isDrawCursor() && drawCursor) {
             drawCursor(g);
         }
     }
@@ -426,7 +427,6 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         }
 
         updateTimerClick(now);
-
         updateGui(views);
 
         updating = false;
@@ -435,7 +435,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     private void fastReload() {
         locked = true;
 
-        //Just Rebuild UI Components
+        // Just Rebuild UI Components
         for (View view : views) {
             view.rebuild();
         }

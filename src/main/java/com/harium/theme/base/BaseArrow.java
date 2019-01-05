@@ -8,7 +8,7 @@ public class BaseArrow implements MouseArrow {
 
     private int mx, my;
 
-    // TODO Change logic to BufferedLayer
+    // TODO Change logic to BufferedLayer (or Pixmap...)
     @Override
     public void draw(Graphics g) {
         // Draw Basic Cursor
