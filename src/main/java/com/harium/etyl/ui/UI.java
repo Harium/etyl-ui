@@ -32,6 +32,9 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public static long currentTime = 0;
     public static float timerClickAmount = 0;
 
+    // Useful in mobile environment
+    private static boolean drawCursor = true;
+
     // Arrow
     public ArrowDrawer arrowDrawer;
     public ArrowTheme arrowTheme;
@@ -49,6 +52,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     private boolean locked = false;
     private boolean updating = false;
     private boolean updatingEvents = false;
+
 
     public static List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
     private static List<View> views = new ArrayList<View>();
@@ -305,6 +309,9 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawCursor(Graphics g) {
+        if (!drawCursor) {
+            return;
+        }
         arrowDrawer.setLocation(mx, my);
         // Draw Timed Cursor Information
         if (timerClick && overClickable) {
@@ -490,4 +497,11 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         }
     };
 
+    public static void showCursor() {
+        drawCursor = true;
+    }
+
+    public static void hideCursor() {
+        drawCursor = false;
+    }
 }
