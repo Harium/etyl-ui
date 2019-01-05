@@ -39,8 +39,8 @@ public class Slider extends UIView {
         slider.setMaxValue(maxValue);
     }
 
-    public int getValue() {
-        return (int) slider.getValue();
+    public float getValue() {
+        return slider.getValue();
     }
 
     public void setValue(int value) {
