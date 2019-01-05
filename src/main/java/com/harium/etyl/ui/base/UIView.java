@@ -89,8 +89,8 @@ public abstract class UIView extends View {
     }
 
     @Override
-    public boolean colideRectRect(int bx, int by, int bw, int bh) {
-        return delegatedView.colideRectRect(bx, by, bw, bh);
+    public boolean collideRectRect(int bx, int by, int bw, int bh) {
+        return delegatedView.collideRectRect(bx, by, bw, bh);
     }
 
     @Override
@@ -99,8 +99,8 @@ public abstract class UIView extends View {
     }
 
     @Override
-    public boolean colideCircleCircle(int bx, int by, int bw, int bh) {
-        return delegatedView.colideCircleCircle(bx, by, bw, bh);
+    public boolean collideCircleCircle(int bx, int by, int bw, int bh) {
+        return delegatedView.collideCircleCircle(bx, by, bw, bh);
     }
 
     @Override
@@ -114,8 +114,8 @@ public abstract class UIView extends View {
     }
 
     @Override
-    public boolean colideCirclePoint(int px, int py) {
-        return delegatedView.colideCirclePoint(px, py);
+    public boolean collideCirclePoint(int px, int py) {
+        return delegatedView.collideCirclePoint(px, py);
     }
 
     @Override

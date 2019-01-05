@@ -155,7 +155,7 @@ public abstract class Resizer<T extends Layer> implements Drawable {
         if (!dragged) {
             if (!moveOnly) {
                 for (int b = 0; b < 9; b++) {
-                    if (points[b].colideRectPoint(mx, my)) {
+                    if (points[b].collideRectPoint(mx, my)) {
                         lastIndex = b;
 
                         notifyStateChange(points[b].getState());

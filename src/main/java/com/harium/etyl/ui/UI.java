@@ -468,7 +468,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     @Override
     public void changeMouseState(MouseState state) {
-        arrowDrawer.changeState(state);
+        arrowDrawer.changeMouseState(state);
     }
 
     public View getMouseOver() {

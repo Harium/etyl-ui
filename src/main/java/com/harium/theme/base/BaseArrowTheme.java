@@ -27,7 +27,7 @@ public class BaseArrowTheme implements ArrowDrawer, ArrowTheme {
         arrow.draw(g);
     }
 
-    public void changeState(MouseState state) {
+    public void changeMouseState(MouseState state) {
 
     }
 

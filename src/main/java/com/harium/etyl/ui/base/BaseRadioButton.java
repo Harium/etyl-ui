@@ -64,7 +64,7 @@ public class BaseRadioButton extends BaseCheckBox {
 
     @Override
     public boolean onMouse(int mx, int my) {
-        return colideCirclePoint(mx, my);
+        return collideCirclePoint(mx, my);
     }
 
     public String getValue() {

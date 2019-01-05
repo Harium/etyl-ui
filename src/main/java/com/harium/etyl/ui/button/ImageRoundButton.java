@@ -16,7 +16,7 @@ public class ImageRoundButton extends ImageButton {
     @Override
     public boolean onMouse(int mx, int my) {
 
-        return colideCircleCircle(mx - w / 2, my - w / 2, 1, 1);
+        return collideCircleCircle(mx - w / 2, my - w / 2, 1, 1);
     }
 
 }
