@@ -4,7 +4,6 @@ import com.harium.etyl.ui.base.BaseSlider;
 import com.harium.etyl.ui.base.UIView;
 import com.harium.etyl.ui.theme.ThemeManager;
 
-
 public class Slider extends UIView {
 
     private BaseSlider slider;
@@ -23,19 +22,19 @@ public class Slider extends UIView {
         delegateView(view);
     }
 
-    public int getMinValue() {
-        return (int) slider.getMinValue();
+    public float getMinValue() {
+        return slider.getMinValue();
     }
 
-    public void setMinValue(int minValue) {
+    public void setMinValue(float minValue) {
         slider.setMinValue(minValue);
     }
 
-    public int getMaxValue() {
-        return (int) slider.getMaxValue();
+    public float getMaxValue() {
+        return slider.getMaxValue();
     }
 
-    public void setMaxValue(int maxValue) {
+    public void setMaxValue(float maxValue) {
         slider.setMaxValue(maxValue);
     }
 
@@ -43,7 +42,7 @@ public class Slider extends UIView {
         return slider.getValue();
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         slider.setValue(value);
     }
 

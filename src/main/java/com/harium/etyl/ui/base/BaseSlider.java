@@ -119,7 +119,7 @@ public class BaseSlider extends View {
         return minValue;
     }
 
-    public void setMinValue(int minValue) {
+    public void setMinValue(float minValue) {
         this.minValue = minValue;
     }
 
@@ -127,7 +127,7 @@ public class BaseSlider extends View {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
+    public void setMaxValue(float maxValue) {
         this.maxValue = maxValue;
     }
 
