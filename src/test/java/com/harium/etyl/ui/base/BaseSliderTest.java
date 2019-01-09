@@ -10,14 +10,62 @@ public class BaseSliderTest {
 
     @Test
     public void testUpdateValue() {
-        BaseSlider slider = new BaseSlider(0,0,100,1);
+        BaseSlider slider = new BaseSlider(0, 0, 100, 1);
         slider.setMaxValue(1);
         slider.setMinValue(0);
 
-        PointerEvent event = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 50,0);
+        PointerEvent event = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 50, 0);
         slider.updateValue(event);
 
         Assert.assertEquals(0.5f, slider.getValue(), 0);
+        Assert.assertEquals(50, slider.sliderPosition);
+    }
+
+    @Test
+    public void testCalculateValue() {
+        BaseSlider slider = new BaseSlider(0, 0, 100, 1);
+        slider.setMinValue(-1);
+        slider.setMaxValue(+1);
+        Assert.assertEquals(0, slider.getValue(), 0);
+
+        slider.setMinValue(1);
+        slider.setMaxValue(3);
+        Assert.assertEquals(slider.getMinValue(), slider.calculateValue(0), 0);
+    }
+
+    @Test
+    public void testSetValues() {
+        BaseSlider slider = new BaseSlider(0, 0, 100, 1);
+        slider.setMinValue(0);
+        slider.setMaxValue(+1);
+        Assert.assertEquals(slider.button.getW() / 2, slider.button.getX(), 0);
+
+        slider.setMinValue(-1);
+        slider.setMaxValue(+1);
+        Assert.assertEquals(slider.getW() / 2 - slider.button.getW() / 2, slider.button.getX(), 0);
+
+        slider.setMaxValue(+2);
+        slider.setMinValue(-2);
+        Assert.assertEquals(slider.getW() / 2 - slider.button.getW() / 2, slider.button.getX(), 0);
+    }
+
+    @Test
+    public void testMultipleSliders() {
+        BaseSlider sliderA = new BaseSlider(0, 0, 100, 1);
+        BaseSlider sliderB = new BaseSlider(0, 1, 100, 1);
+
+        PointerEvent event = new PointerEvent();
+        event.set(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 50,0);
+        sliderA.updateMouse(event);
+        sliderB.updateMouse(event);
+
+        // Move down while pressed
+        event.set(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.DRAGGED, 50,1);
+        sliderA.updateMouse(event);
+        sliderB.updateMouse(event);
+
+        Assert.assertTrue(sliderA.activated);
+        Assert.assertFalse(sliderB.activated);
     }
 
 }

@@ -1,9 +1,6 @@
 package com.harium.etyl.ui.base;
 
-import com.harium.etyl.commons.event.GUIEvent;
-import com.harium.etyl.commons.event.KeyEvent;
-import com.harium.etyl.commons.event.MouseEvent;
-import com.harium.etyl.commons.event.PointerEvent;
+import com.harium.etyl.commons.event.*;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.View;
@@ -45,13 +42,15 @@ public class BaseSlider extends View {
         GUIEvent value = super.updateMouse(event);
 
         if (mouseOver) {
-            if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
+            // Only on first pressed
+            if (event.getState() == PointerState.PRESSED && event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 activate();
                 activated = true;
             }
         }
 
         if (activated) {
+            // Pressed or Dragged
             if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 updateValue(event);
                 return GUIEvent.COMPONENT_CHANGED;
@@ -75,9 +74,7 @@ public class BaseSlider extends View {
     }
 
     public void updateValue(PointerEvent event) {
-        float interval = maxValue - minValue;
-        int mx = event.getX() - getX();
-        value = (mx * interval) / w;
+        value = calculateValue(event.getX());
 
         if (value < minValue) {
             value = minValue;
@@ -121,6 +118,7 @@ public class BaseSlider extends View {
 
     public void setMinValue(float minValue) {
         this.minValue = minValue;
+        updateSliderPosition();
     }
 
     public float getMaxValue() {
@@ -129,6 +127,7 @@ public class BaseSlider extends View {
 
     public void setMaxValue(float maxValue) {
         this.maxValue = maxValue;
+        updateSliderPosition();
     }
 
     public float getValue() {
@@ -136,14 +135,8 @@ public class BaseSlider extends View {
     }
 
     public void setValue(float value) {
-
         this.value = value;
-
-        float interval = maxValue - minValue;
-
-        float bx = x + ((value * w) / interval);
-
-        button.setX((int) bx - button.getW() / 2);
+        updateSliderPosition();
     }
 
     @Override
@@ -158,6 +151,21 @@ public class BaseSlider extends View {
         }
 
         return GUIEvent.NONE;
+    }
+
+    /* package*/ float calculateValue(int x) {
+        int mx = x - getX();
+        float interval = maxValue - minValue;
+        float factor = mx / (float) w;
+
+        return interval * factor + minValue;
+    }
+
+    private void updateSliderPosition() {
+        float interval = maxValue - minValue;
+        float bx = x + (((value-minValue) * w) / interval);
+
+        button.setX((int) bx - button.getW() / 2);
     }
 
 }
