@@ -1,4 +1,4 @@
-package com.harium.theme.base;
+package com.harium.etyl.ui.theme.base;
 
 import com.harium.etyl.ui.base.*;
 import com.harium.etyl.ui.theme.Theme;

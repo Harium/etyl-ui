@@ -2,8 +2,8 @@ package com.harium.etyl.ui.theme;
 
 import com.harium.etyl.ui.theme.listener.ArrowThemeListener;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
-import com.harium.theme.base.BaseArrowTheme;
-import com.harium.theme.base.BaseTheme;
+import com.harium.etyl.ui.theme.base.BaseArrowTheme;
+import com.harium.etyl.ui.theme.base.BaseTheme;
 
 
 public class ThemeManager {

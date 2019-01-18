@@ -24,6 +24,8 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 
     protected View root = null;
 
+    protected String alt = null;
+
     protected List<View> views = new ArrayList<View>();
 
     protected List<Action> actions = new ArrayList<Action>();
@@ -286,6 +288,14 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
         return id;
     }
 
+    public String getAlt() {
+        return alt;
+    }
+
+    public void setAlt(String alt) {
+        this.alt = alt;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -328,6 +338,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
         if (!visible) {
             return;
         }
+
         this.draw(g);
 
         for (View child : views) {

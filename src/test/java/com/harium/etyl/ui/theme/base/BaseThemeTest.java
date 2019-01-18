@@ -1,6 +1,5 @@
 package com.harium.etyl.ui.theme.base;
 
-import com.harium.theme.base.BaseArrowTheme;
 import org.junit.Assert;
 import org.junit.Test;
 

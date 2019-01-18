@@ -3,6 +3,7 @@ package com.harium.etyl.ui.base;
 import com.harium.etyl.commons.event.*;
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.core.input.mouse.Mouse;
 import com.harium.etyl.ui.Label;
 import com.harium.etyl.ui.RoundView;
 import com.harium.etyl.ui.theme.Theme;
@@ -13,11 +14,11 @@ import com.harium.etyl.ui.theme.Theme;
 
 public class BaseButton extends RoundView {
 
+    private static final int UNDEFINED = -1;
+
     protected Label label;
 
-    private String alt = "";
-
-    protected boolean clicked = false;
+    protected int clicked = UNDEFINED;
 
     public BaseButton(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -45,7 +46,7 @@ public class BaseButton extends RoundView {
             if (!mouseOver) {
                 color = theme.getBaseColor();
             } else {
-                if (clicked) {
+                if (isClicked()) {
                     color = theme.getActiveColor();
                 } else {
                     color = theme.getSelectionColor();
@@ -110,15 +111,13 @@ public class BaseButton extends RoundView {
 
         if (!disabled) {
 
-            //If mouse is Over
             if (mouseOver) {
 
                 if (event.getState() == PointerState.PRESSED) {
 
                     if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
 
-                        clicked = true;
-
+                        clicked = event.getKey().getCode();
                         leftDown();
 
                         value = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
@@ -135,32 +134,6 @@ public class BaseButton extends RoundView {
 
                         value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
                     }
-                } else if (event.getState() == PointerState.RELEASED) {
-
-                    if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
-
-                        // TODO Check if clicked was fired by the same button
-                        if (clicked) {
-                            leftUp();
-                            clicked = false;
-                        }
-
-                        value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
-
-                    } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-
-                        rightUp();
-
-                        value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
-
-                    } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
-
-                        middleUp();
-
-                        value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
-
-                    }
-
                 } else if (event.getState() == PointerState.DOUBLE_CLICK) {
 
                     if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
@@ -184,16 +157,42 @@ public class BaseButton extends RoundView {
                     value = GUIEvent.MOUSE_OVER;
 
                 }
-
-                //If mouse is not over
+                // If mouse is not over
             } else {
-
                 if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-
                     onFocus = false;
-
                 }
+            }
 
+            if (event.getState() == PointerState.RELEASED) {
+
+                if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
+
+                    if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
+                        leftUp();
+                        clicked = UNDEFINED;
+                    }
+
+                    value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
+
+                } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
+
+                    if (clicked == MouseEvent.MOUSE_BUTTON_RIGHT.getCode()) {
+                        rightUp();
+                        clicked = UNDEFINED;
+                    }
+
+                    value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+
+                } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
+
+                    if (clicked == MouseEvent.MOUSE_BUTTON_MIDDLE.getCode()) {
+                        middleUp();
+                        clicked = UNDEFINED;
+                    }
+
+                    value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
+                }
             }
         }
 
@@ -254,12 +253,10 @@ public class BaseButton extends RoundView {
         }
 
         if (event.isKeyDown(KeyEvent.VK_ENTER)) {
+            // Simulate Click
             this.updateEvent(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
-        }/*else if(event.getReleased(Tecla.TSK_ENTER)) {
-
-			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
-
-		}*/
+            this.updateEvent(GUIEvent.MOUSE_LEFT_BUTTON_UP);
+        }
 
         return GUIEvent.NONE;
     }
@@ -268,16 +265,8 @@ public class BaseButton extends RoundView {
         return label != null;
     }
 
-    public String getAlt() {
-        return alt;
-    }
-
-    public void setAlt(String alt) {
-        this.alt = alt;
-    }
-
     public boolean isClicked() {
-        return clicked;
+        return clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode();
     }
 
     @Override

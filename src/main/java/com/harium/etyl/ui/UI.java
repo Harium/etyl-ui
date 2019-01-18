@@ -12,7 +12,7 @@ import com.harium.etyl.ui.theme.ArrowTheme;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
-import com.harium.theme.base.BaseArrowTheme;
+import com.harium.etyl.ui.theme.base.BaseArrowTheme;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,9 +41,14 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     private View focus = NULL_VIEW;
 
-    //View above Mouse
+    // View above Mouse
     public View mouseOver = NULL_VIEW;
     protected View focusComponent = NULL_VIEW;
+    private long mouseOverStart = 0;
+
+    // Alt text
+    private long altDelay = 2000;
+    private boolean drawAlt = false;
 
     private boolean overClickable = false;
 
@@ -127,9 +132,17 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                 if (!view.isMouseOver()) {
                     // Lose Mouse Focus
                     mouseOver = NULL_VIEW;
+                    drawAlt = false;
+                } else {
+                    // Check for alt
+                    if (event.getTimestamp()-mouseOverStart>altDelay) {
+                        drawAlt = true;
+                        //show alt
+                    }
                 }
 
             } else if (!wasMouseOver && view.isMouseOver()) {
+                mouseOverStart = event.getTimestamp();
                 // Gain Mouse Focus
                 mouseOver = view;
             }
@@ -359,6 +372,9 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         while (componentIterator.hasNext()) {
             View child = componentIterator.next();
             child.drawWithChildren(g);
+            //if (drawAlt) {
+            //   Draw child.getAlt();
+            //}
         }
     }
 

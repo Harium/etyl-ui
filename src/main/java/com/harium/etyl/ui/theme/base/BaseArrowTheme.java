@@ -1,10 +1,9 @@
-package com.harium.theme.base;
+package com.harium.etyl.ui.theme.base;
 
 import com.harium.etyl.commons.event.MouseState;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.theme.ArrowDrawer;
 import com.harium.etyl.ui.theme.ArrowTheme;
-import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.cursor.arrow.MouseArrow;
 
 public class BaseArrowTheme implements ArrowDrawer, ArrowTheme {

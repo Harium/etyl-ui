@@ -1,4 +1,4 @@
-package com.harium.theme.base;
+package com.harium.etyl.ui.theme.base;
 
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
