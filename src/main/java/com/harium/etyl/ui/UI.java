@@ -412,6 +412,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         this.context = context;
         this.w = context.getW();
         this.h = context.getH();
+        ThemeManager.getInstance().getTheme().loadFonts();
     }
 
     @Override

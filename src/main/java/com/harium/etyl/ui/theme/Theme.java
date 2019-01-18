@@ -12,16 +12,16 @@ import java.util.Map;
 
 public abstract class Theme implements ThemeFactory, LanguageChangeListener {
 
-    private Font buttonFont;
-    private Font font;
+    protected Font buttonFont;
+    protected Font font;
 
-    private int fontSize = 14;
-    private FontStyle fontStyle = FontStyle.PLAIN;
-    private String fontName;
+    protected int fontSize = 14;
+    protected FontStyle fontStyle = FontStyle.PLAIN;
+    protected String fontName;
 
-    private Style style = new Style();
+    protected Style style = new Style();
 
-    private Map<Language, String> fonts;
+    protected Map<Language, String> fonts;
 
     public Theme() {
         super();

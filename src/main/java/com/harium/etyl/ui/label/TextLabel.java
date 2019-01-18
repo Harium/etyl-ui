@@ -3,12 +3,13 @@ package com.harium.etyl.ui.label;
 import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.commons.layer.GeometricLayer;
+import com.harium.etyl.core.graphics.Font;
 import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.layer.TextLayer;
 import com.harium.etyl.ui.Label;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
-import com.harium.etyl.commons.layer.GeometricLayer;
-import com.harium.etyl.layer.TextLayer;
 
 public class TextLabel extends Label {
 
@@ -30,7 +31,7 @@ public class TextLabel extends Label {
     }
 
     public TextLabel(String text) {
-        this(0, 0, text);
+        this(text, ThemeManager.getInstance().getTheme().getFontSize());
     }
 
     public TextLabel(String text, float size) {
@@ -72,9 +73,11 @@ public class TextLabel extends Label {
     public void draw(Graphics g) {
         Theme theme = ThemeManager.getInstance().getTheme();
 
-        g.setFont(theme.getFont());
-        g.setFont(g.getFont().deriveFont(layer.getStyle()));
-        g.setFont(g.getFont().deriveFont(layer.getSize()));
+        Font font = theme.getFont();
+
+        g.setFont(font);
+        g.setFontStyle(layer.getStyle());
+        g.setFontSize(layer.getSize());
 
         if (!onFocus) {
             g.setColor(theme.getTextColor());
