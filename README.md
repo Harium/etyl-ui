@@ -16,7 +16,7 @@ It is obviously not finished but it suits my needs most of the time.
 <dependency>
     <groupId>com.harium.etyl</groupId>
     <artifactId>ui</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.6</version>
 </dependency>
 ```
 
