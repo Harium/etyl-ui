@@ -2,7 +2,6 @@ package com.harium.etyl.ui.base;
 
 import com.harium.etyl.commons.event.*;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.View;
 import com.harium.etyl.ui.theme.Theme;
 
@@ -17,24 +16,11 @@ public class BaseSlider extends View {
     protected float value = 0;
     protected boolean activated = false;
 
-    protected View button;
-
     public BaseSlider(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        buildButton();
         deactivate();
-        sliderPosition = getX() - button.getW() / 2;
-        button.setX(sliderPosition);
-    }
-
-    public void buildButton() {
-        button = new Button(x, y, h / 4, h);
-    }
-
-    public void rebuild() {
-        button.rebuild();
-        button.setX(sliderPosition);
+        sliderPosition = getX();
     }
 
     @Override
@@ -60,8 +46,6 @@ public class BaseSlider extends View {
             }
         }
 
-        button.setMouseOver(mouseOver);
-
         return value;
     }
 
@@ -78,15 +62,13 @@ public class BaseSlider extends View {
 
         if (value < minValue) {
             value = minValue;
-            sliderPosition = getX() - button.getW() / 2;
+            sliderPosition = getX();
         } else if (value > maxValue) {
             value = maxValue;
-            sliderPosition = getX() + getW() - button.getW() / 2;
+            sliderPosition = getX() + getW();
         } else {
-            sliderPosition = event.getX() - button.getW() / 2;
+            sliderPosition = event.getX();
         }
-
-        button.setX(sliderPosition);
     }
 
     @Override
@@ -107,9 +89,6 @@ public class BaseSlider extends View {
 
         int sh = h / 5;
         g.fillRect(x, y + h / 2 - sh / 2, w, sh);
-
-        //Draw Button
-        button.draw(g);
     }
 
     public float getMinValue() {
@@ -161,11 +140,10 @@ public class BaseSlider extends View {
         return interval * factor + minValue;
     }
 
-    private void updateSliderPosition() {
+    protected void updateSliderPosition() {
         float interval = maxValue - minValue;
-        float bx = x + (((value-minValue) * w) / interval);
-
-        button.setX((int) bx - button.getW() / 2);
+        float bx = x + (((value - minValue) * w) / interval);
+        sliderPosition = (int) bx;
     }
 
 }
