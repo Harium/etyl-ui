@@ -9,6 +9,7 @@ import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.Panel;
 import com.harium.etyl.ui.View;
 import com.harium.etyl.ui.label.TextLabel;
+import com.harium.etyl.ui.listener.OnOptionChangeListener;
 import com.harium.etyl.ui.spinner.composer.SpinnerComposer;
 import com.harium.etyl.ui.spinner.composer.StringHorizontalComposer;
 
@@ -24,9 +25,10 @@ public class StringSpinner extends View {
     protected TextLabel resultLabel;
     protected Panel panel;
 
-    protected List<String> options = new ArrayList<String>();
-
     private int currentItem = 0;
+
+    protected List<String> options = new ArrayList<String>();
+    protected OnOptionChangeListener onOptionChangeListener = View.NULL_ON_OPTION_CHANGE_LISTENER;
 
     public StringSpinner(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -81,6 +83,7 @@ public class StringSpinner extends View {
 
         String result = options.get(currentItem);
         resultLabel.setText(result);
+        onOptionChangeListener.onOptionChange(result);
     }
 
     @Override
@@ -135,6 +138,14 @@ public class StringSpinner extends View {
     public void setOptions(List<String> options) {
         this.options = options;
         updateValue();
+    }
+
+    public OnOptionChangeListener getOnOptionChangeListener() {
+        return onOptionChangeListener;
+    }
+
+    public void setOnOptionChangeListener(OnOptionChangeListener onOptionChangeListener) {
+        this.onOptionChangeListener = onOptionChangeListener;
     }
 
 }

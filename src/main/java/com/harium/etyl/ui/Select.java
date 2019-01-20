@@ -9,6 +9,7 @@ import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.base.BaseButton;
 import com.harium.etyl.ui.icon.DownArrow;
 import com.harium.etyl.ui.list.Option;
+import com.harium.etyl.ui.listener.OnOptionChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,15 @@ import java.util.List;
 
 public class Select extends View {
 
-    private List<Option> options = new ArrayList<Option>();
+    protected BaseButton button;
 
-    private BaseButton button;
+    protected int selectedOption = 0;
 
-    private int selectedOption = 0;
+    protected boolean showOptions = false;
+    protected boolean multiSelect = false;
 
-    private boolean showOptions = false;
+    protected List<Option> options = new ArrayList<Option>();
+    private OnOptionChangeListener onOptionChangeListener = View.NULL_ON_OPTION_CHANGE_LISTENER;
 
     public Select(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -61,7 +64,6 @@ public class Select extends View {
 
     @Override
     public void draw(Graphics g) {
-
         g.setColor(Color.BLACK);
         g.drawRect(x, y, w, h);
 
@@ -94,6 +96,7 @@ public class Select extends View {
 
     @Override
     public GUIEvent updateMouse(PointerEvent event) {
+        // TODO OnOptionChange
         return GUIEvent.NONE;
     }
 
@@ -103,5 +106,11 @@ public class Select extends View {
         return GUIEvent.NONE;
     }
 
+    public OnOptionChangeListener getOnOptionChangeListener() {
+        return onOptionChangeListener;
+    }
 
+    public void setOnOptionChangeListener(OnOptionChangeListener onOptionChangeListener) {
+        this.onOptionChangeListener = onOptionChangeListener;
+    }
 }
