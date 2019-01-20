@@ -3,9 +3,9 @@ package com.harium.etyl.ui.base;
 import com.harium.etyl.commons.event.*;
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.core.input.mouse.Mouse;
 import com.harium.etyl.ui.Label;
 import com.harium.etyl.ui.RoundView;
+import com.harium.etyl.ui.listener.OnClickListener;
 import com.harium.etyl.ui.theme.Theme;
 
 /**
@@ -19,6 +19,8 @@ public class BaseButton extends RoundView {
     protected Label label;
 
     protected int clicked = UNDEFINED;
+
+    protected OnClickListener listener = NULL_ON_CLICK_LISTENER;
 
     public BaseButton(int x, int y, int w, int h) {
         super(x, y, w, h);

@@ -6,10 +6,7 @@ import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.event.PointerEvent;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.ui.listener.OnCheckListener;
-import com.harium.etyl.ui.listener.OnOptionChangeListener;
-import com.harium.etyl.ui.listener.OnTextChangeListener;
-import com.harium.etyl.ui.listener.OnValueChangeListener;
+import com.harium.etyl.ui.listener.*;
 import com.harium.etyl.ui.style.Style;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
@@ -398,6 +395,13 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
     protected static final OnOptionChangeListener NULL_ON_OPTION_CHANGE_LISTENER = new OnOptionChangeListener() {
         @Override
         public void onOptionChange(String option) {
+
+        }
+    };
+
+    protected static final OnClickListener NULL_ON_CLICK_LISTENER = new OnClickListener() {
+        @Override
+        public void onClick() {
 
         }
     };
