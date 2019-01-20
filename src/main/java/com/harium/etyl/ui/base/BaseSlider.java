@@ -36,13 +36,12 @@ public class BaseSlider extends View {
         }
 
         if (activated) {
-            // Pressed or Dragged
-            if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-                updateValue(event);
-                return GUIEvent.COMPONENT_CHANGED;
-            } else if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
+            if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 activated = false;
                 deactivate();
+            } else {
+                updateValue(event);
+                return GUIEvent.COMPONENT_CHANGED;
             }
         }
 

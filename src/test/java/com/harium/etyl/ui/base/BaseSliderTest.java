@@ -34,19 +34,35 @@ public class BaseSliderTest {
     }
 
     @Test
+    public void testMoveSlider() {
+        BaseSlider slider = new BaseSlider(0, 0, 100, 1);
+        slider.setMinValue(-1);
+        slider.setMaxValue(+1);
+
+        PointerEvent click = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 0,0);
+        slider.updateMouse(click);
+        Assert.assertEquals(-1, slider.getValue(), 0);
+
+        PointerEvent move = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.MOVE, 50,0);
+        slider.updateMouse(move);
+        Assert.assertEquals(0, slider.getValue(), 0);
+    }
+
+    @Test
     public void testSetValues() {
         BaseSlider slider = new BaseSlider(0, 0, 100, 1);
+        slider.setValue(0);
         slider.setMinValue(0);
         slider.setMaxValue(+1);
-        Assert.assertEquals(slider.button.getW() / 2, slider.button.getX(), 0);
+        Assert.assertEquals(0, slider.getValue(), 0);
 
         slider.setMinValue(-1);
         slider.setMaxValue(+1);
-        Assert.assertEquals(slider.getW() / 2 - slider.button.getW() / 2, slider.button.getX(), 0);
+        Assert.assertEquals(0, slider.getValue(), 0);
 
         slider.setMaxValue(+2);
         slider.setMinValue(-2);
-        Assert.assertEquals(slider.getW() / 2 - slider.button.getW() / 2, slider.button.getX(), 0);
+        Assert.assertEquals(0, slider.getValue(), 0);
     }
 
     @Test
