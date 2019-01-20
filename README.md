@@ -16,7 +16,7 @@ It is obviously not finished but it suits my needs most of the time.
 <dependency>
     <groupId>com.harium.etyl</groupId>
     <artifactId>ui</artifactId>
-    <version>0.1.7</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -27,6 +27,8 @@ import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.UI;
+import com.harium.etyl.ui.theme.base.BaseArrowTheme;
+import com.harium.etyl.ui.theme.base.BaseTheme;
 
 public class ExampleUI extends Etyl {
 
@@ -42,6 +44,8 @@ public class ExampleUI extends Etyl {
     @Override
     public Application startApplication() {
         // Setup
+        UI.setTheme(new BaseTheme());
+        UI.setArrowTheme(new BaseArrowTheme());
         addModule(UI.getInstance());
         return new UIApplication(w, h);
     }
