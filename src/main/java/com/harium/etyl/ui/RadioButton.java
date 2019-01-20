@@ -50,10 +50,6 @@ public class RadioButton extends UIView {
         radio.setChecked(checked);
     }
 
-    public void setChecker(Label checker) {
-        radio.setCheckLabel(checker);
-    }
-
     public void setGroup(String groupName) {
         radio.setGroup(groupName);
     }

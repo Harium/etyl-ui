@@ -171,29 +171,27 @@ public class BaseTextField extends TextFieldView {
         return GUIEvent.NONE;
     }
 
-    //TODO escreve texto.sub(0,minMark);
-    //Para não sair da caixa
     public void draw(Graphics g) {
         Theme theme = getTheme();
+        g.setFont(theme.getFont());
 
         //g.setImage(layer.getBuffer());
         //int x = 0;
         //int y = 0;
+
+        // Preventing draw overflow
         g.setClip(left(), top(), width(), height());
 
-        //TODO
-        //g.setFont(theme.getFont());
-
-        //Para poder ser usado pelo password
+        // overrided by password
         String text = this.getText();
 
         int fontSize = theme.getFontSize();
 
-        //3 is necessary to show the cursor
-        //3 = 1px bordex+1px padding +1px cursor
+        // 3 is necessary to show the cursor
+        // 3 = 1px bordex+1px padding +1px cursor
         float dif = w - 3 - g.textWidth(text);
 
-        //Remover
+        //Remove
         if (onFocus) {
             g.setColor(theme.getTextFieldColor());
         } else {
@@ -224,17 +222,11 @@ public class BaseTextField extends TextFieldView {
 
             int cxm = g.textWidth(text.substring(minMark, maxMark));
 
-            //Draw selected text
+            // Fill Selection Rect
             g.setColor(theme.getSelectionColor());
-
-            //fill Mark Rect
             g.fillRect(x + cx + 2, y + 2, cxm, h - 3);
 
-            //Invert textColor
-
-            //Por enquanto escreve normal
-            //g.setColor(theme.getTextMarkColor());
-            //g.setColor(Color.BLACK);
+            // Invert textColor if selected
             g.setColor(theme.getTextColor());
             drawText(g, x, y + h / 2 + fontSize / 2, text.substring(0, minMark));
 
@@ -248,7 +240,7 @@ public class BaseTextField extends TextFieldView {
         if (onFocus) {
 
             g.setColor(theme.getTextFieldColor());
-            //Draw Cursor
+            // Draw Cursor
 
             int cx = g.textWidth(text.substring(0, cursor));
             cx += x + 1;
@@ -341,7 +333,7 @@ public class BaseTextField extends TextFieldView {
     }
 
     public String getText() {
-        //Remove Tabs
+        // Remove Tabs
         text = text.replace("\n", "").replace("\r", "");
         return text;
     }

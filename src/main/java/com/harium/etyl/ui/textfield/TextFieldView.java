@@ -1,6 +1,7 @@
 package com.harium.etyl.ui.textfield;
 
 import com.harium.etyl.ui.View;
+import com.harium.etyl.ui.listener.OnTextChangeListener;
 
 public abstract class TextFieldView extends View {
 
@@ -22,7 +23,7 @@ public abstract class TextFieldView extends View {
     protected boolean shift = false;
     protected boolean control = false;
 
-    private OnTextChangedListener onTextChangeListener;
+    protected OnTextChangeListener onTextChangeListener = View.NULL_TEXT_CHANGE_LISTENER;
 
     public TextFieldView(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -209,15 +210,14 @@ public abstract class TextFieldView extends View {
 
 
     protected void notifyTextChanged() {
-        if (onTextChangeListener == null)
-            return;
+        onTextChangeListener.onTextChange(text);
     }
 
-    public OnTextChangedListener getOnTextChangeListener() {
+    public OnTextChangeListener getOnTextChangeListener() {
         return onTextChangeListener;
     }
 
-    public void setOnTextChangeListener(OnTextChangedListener onTextChangeListener) {
+    public void setOnTextChangeListener(OnTextChangeListener onTextChangeListener) {
         this.onTextChangeListener = onTextChangeListener;
     }
 

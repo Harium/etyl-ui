@@ -3,7 +3,6 @@ package com.harium.etyl.ui.base;
 import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.RadioGroup;
-import com.harium.etyl.ui.label.BaseRadioLabel;
 import com.harium.etyl.ui.listener.OnCheckListener;
 
 /**
@@ -22,17 +21,11 @@ public class BaseRadioButton extends BaseCheckBox {
 
     public BaseRadioButton(int x, int y, int w, int h) {
         super(x, y, w, h);
-        buildChecker();
     }
 
     public BaseRadioButton(int x, int y, String groupName) {
         this(x, y);
-        buildChecker();
         setGroup(groupName);
-    }
-
-    public void buildChecker() {
-        checkLabel = new BaseRadioLabel(x, y, w, h);
     }
 
     @Override
@@ -62,8 +55,13 @@ public class BaseRadioButton extends BaseCheckBox {
         g.setColor(getTheme().getTextFieldWithoutFocusColor());
 
         if (isChecked()) {
-            g.fillCircle(x + w / 2, y + h / 2, w / 5);
+            drawCheck(g);
         }
+    }
+
+    protected void drawCheck(Graphics g) {
+        int radius = w / 3;
+        g.fillCircle(x, y, radius);
     }
 
     public RadioGroup getGroup() {

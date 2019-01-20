@@ -7,6 +7,7 @@ import com.harium.etyl.commons.event.PointerEvent;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.listener.OnCheckListener;
+import com.harium.etyl.ui.listener.OnTextChangeListener;
 import com.harium.etyl.ui.listener.OnValueChangeListener;
 import com.harium.etyl.ui.style.Style;
 import com.harium.etyl.ui.theme.Theme;
@@ -372,16 +373,23 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
         }
     }
 
-    protected static OnValueChangeListener NULL_ON_VALUE_CHANGE_LISTENER = new OnValueChangeListener() {
+    protected static final OnValueChangeListener NULL_ON_VALUE_CHANGE_LISTENER = new OnValueChangeListener() {
         @Override
         public void onValueChange(float value) {
 
         }
     };
 
-    protected static OnCheckListener NULL_ON_CHECK_LISTENER = new OnCheckListener() {
+    protected static final OnCheckListener NULL_ON_CHECK_LISTENER = new OnCheckListener() {
         @Override
         public void onCheck(boolean checked) {
+
+        }
+    };
+
+    protected static final OnTextChangeListener NULL_TEXT_CHANGE_LISTENER = new OnTextChangeListener() {
+        @Override
+        public void onTextChange(String text) {
 
         }
     };

@@ -1,7 +1,6 @@
 package com.harium.etyl.ui.base;
 
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.ui.Label;
 import com.harium.etyl.ui.listener.OnCheckListener;
 
 /**
@@ -49,8 +48,13 @@ public class BaseCheckBox extends BaseButton {
     }
 
     protected void drawCheck(Graphics g) {
-        int radius = w / 3;
-        g.fillCircle(x, y, radius);
+        int hw = w / 2;
+        int hh = h / 2;
+
+        int line = w / 4;
+
+        g.drawLine(x + hw - line, y + hh - line, x + hw, y + hh);
+        g.drawLine(x + hw, y + hh, x + w, y);
     }
 
     public boolean isChecked() {
