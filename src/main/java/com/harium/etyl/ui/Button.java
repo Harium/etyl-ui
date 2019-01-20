@@ -2,6 +2,7 @@ package com.harium.etyl.ui;
 
 import com.harium.etyl.ui.base.BaseButton;
 import com.harium.etyl.ui.base.UIView;
+import com.harium.etyl.ui.listener.OnClickListener;
 import com.harium.etyl.ui.theme.ThemeManager;
 
 public class Button extends UIView {
@@ -47,6 +48,12 @@ public class Button extends UIView {
         button.setCenterLabel(label);
     }
 
+    public OnClickListener getListener() {
+        return button.getListener();
+    }
 
+    public void setListener(OnClickListener listener) {
+        button.setListener(listener);
+    }
 
 }

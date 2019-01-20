@@ -172,6 +172,7 @@ public class BaseButton extends RoundView {
 
                     if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
                         leftUp();
+                        listener.onClick();
                         clicked = UNDEFINED;
                     }
 
@@ -199,7 +200,7 @@ public class BaseButton extends RoundView {
         }
 
         updateEvent(value);
-        return value;
+        return GUIEvent.NONE;
     }
 
     public Label getLabel() {
@@ -294,4 +295,11 @@ public class BaseButton extends RoundView {
         clicked = view.clicked;
     }
 
+    public OnClickListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnClickListener listener) {
+        this.listener = listener;
+    }
 }
