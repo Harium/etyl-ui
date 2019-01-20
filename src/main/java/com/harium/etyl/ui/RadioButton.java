@@ -30,8 +30,8 @@ public class RadioButton extends UIView {
         return radio.getLabel();
     }
 
-    public RadioGroup getGroup() {
-        return radio.getGroup();
+    public String getGroupName() {
+        return radio.getGroupName();
     }
 
     public void setAlt(String alt) {
@@ -51,15 +51,16 @@ public class RadioButton extends UIView {
     }
 
     public void setChecker(Label checker) {
-        radio.setChecker(checker);
+        radio.setCheckLabel(checker);
     }
 
-    public void setGroup(RadioGroup group) {
-        radio.setGroup(group);
+    public void setGroup(String groupName) {
+        radio.setGroup(groupName);
     }
 
-    public void check() {
-        radio.check();
+    public RadioButton check(boolean checked) {
+        setChecked(checked);
+        return this;
     }
 
 }

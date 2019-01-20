@@ -7,16 +7,15 @@ import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.i18n.Language;
 import com.harium.etyl.i18n.LanguageModule;
+import com.harium.etyl.ui.base.BaseRadioButton;
 import com.harium.etyl.ui.theme.ArrowDrawer;
 import com.harium.etyl.ui.theme.ArrowTheme;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
-import com.harium.etyl.ui.theme.listener.ThemeListener;
 import com.harium.etyl.ui.theme.base.BaseArrowTheme;
+import com.harium.etyl.ui.theme.listener.ThemeListener;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class UI implements Module, ThemeListener, MouseStateChanger {
     private static UI instance;
@@ -57,7 +56,6 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     private boolean locked = false;
     private boolean updating = false;
     private boolean updatingEvents = false;
-
 
     public static List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
     private static List<View> views = new ArrayList<View>();
@@ -135,7 +133,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                     drawAlt = false;
                 } else {
                     // Check for alt
-                    if (event.getTimestamp()-mouseOverStart>altDelay) {
+                    if (event.getTimestamp() - mouseOverStart > altDelay) {
                         drawAlt = true;
                         //show alt
                     }
@@ -474,11 +472,16 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public static void remove(View view) {
+        if (view instanceof BaseRadioButton) {
+            RadioGroup.removeRadioButton((BaseRadioButton) view);
+        }
+
         UI.views.remove(view);
     }
 
     public static void clear() {
         UI.views.clear();
+        RadioGroup.clear();
     }
 
     private boolean isUpdating() {
@@ -521,4 +524,5 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public static void hideCursor() {
         drawCursor = false;
     }
+
 }

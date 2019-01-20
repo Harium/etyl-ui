@@ -2,7 +2,7 @@ package com.harium.etyl.ui.base;
 
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.Label;
-import com.harium.etyl.ui.label.BaseCheckerLabel;
+import com.harium.etyl.ui.listener.OnCheckListener;
 
 /**
  * Checkbox component
@@ -11,7 +11,7 @@ import com.harium.etyl.ui.label.BaseCheckerLabel;
 public class BaseCheckBox extends BaseButton {
 
     protected boolean checked = false;
-    protected Label checker;
+    protected OnCheckListener onCheckListener = NULL_ON_CHECK_LISTENER;
 
     public BaseCheckBox(int x, int y) {
         this(x, y, 22, 22);
@@ -19,7 +19,6 @@ public class BaseCheckBox extends BaseButton {
 
     public BaseCheckBox(int x, int y, int w, int h) {
         super(x, y, w, h);
-        checker = new BaseCheckerLabel(x, y, w, h);
     }
 
     @Override
@@ -45,8 +44,13 @@ public class BaseCheckBox extends BaseButton {
         g.drawRect(x, y, w, h);
 
         if (isChecked()) {
-            checker.draw(g);
+            drawCheck(g);
         }
+    }
+
+    protected void drawCheck(Graphics g) {
+        int radius = w / 3;
+        g.fillCircle(x, y, radius);
     }
 
     public boolean isChecked() {
@@ -57,22 +61,18 @@ public class BaseCheckBox extends BaseButton {
         this.checked = checked;
     }
 
-    public Label getChecker() {
-        return checker;
-    }
-
-    public void setChecker(Label checker) {
-        this.checker = checker;
-
-        checker.setX(x + (w / 2 - checker.getW() / 2) + checker.getX());
-        checker.setY(y + (h / 2 - checker.getH() / 2) + checker.getY());
-
-        checker.setContentBounds(x, y, w, h);
-    }
 
     public void copy(BaseCheckBox view) {
         super.copy(view);
         checked = view.checked;
-        checker = view.checker;
+        onCheckListener = view.onCheckListener;
+    }
+
+    public OnCheckListener getOnCheckListener() {
+        return onCheckListener;
+    }
+
+    public void setOnCheckListener(OnCheckListener onCheckListener) {
+        this.onCheckListener = onCheckListener;
     }
 }

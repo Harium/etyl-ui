@@ -5,7 +5,7 @@ import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.PointerEvent;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.ui.listener.ValueListener;
+import com.harium.etyl.ui.listener.OnValueChangeListener;
 import com.harium.etyl.ui.spinner.composer.SpinnerComposer;
 import com.harium.etyl.ui.spinner.composer.VerticalComposer;
 
@@ -24,7 +24,7 @@ public abstract class Spinner<T extends Number> extends View {
     protected T maxValue;
     protected T minValue;
 
-    protected ValueListener<T> listener;
+    protected OnValueChangeListener listener;
 
     public Spinner(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -71,9 +71,7 @@ public abstract class Spinner<T extends Number> extends View {
     }
 
     protected void reload() {
-        if (listener != null) {
-            listener.onChange(value);
-        }
+        listener.onValueChange(value.floatValue());
 
         String result = value.toString();
         currentValue.setText(result);
@@ -161,14 +159,6 @@ public abstract class Spinner<T extends Number> extends View {
         this.minValue = minValue;
     }
 
-    public ValueListener<T> getListener() {
-        return listener;
-    }
-
-    public void setListener(ValueListener<T> listener) {
-        this.listener = listener;
-    }
-
     @Override
     public void setBounds(int x, int y, int w, int h) {
         panel.setBounds(x, y, w, h);
@@ -183,4 +173,11 @@ public abstract class Spinner<T extends Number> extends View {
         //currentValue.setBounds(x, y + h / 2 - 10, w - buttonWidth, h / 2 - 10);
     }
 
+    public OnValueChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnValueChangeListener listener) {
+        this.listener = listener;
+    }
 }
