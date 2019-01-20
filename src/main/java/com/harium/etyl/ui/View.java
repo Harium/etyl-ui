@@ -217,7 +217,8 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
     }
 
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
+        setW(width);
+        setH(height);
     }
 
     public GUIEvent updateMouse(PointerEvent event) {
