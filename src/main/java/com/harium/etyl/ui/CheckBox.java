@@ -2,6 +2,7 @@ package com.harium.etyl.ui;
 
 import com.harium.etyl.ui.base.BaseCheckBox;
 import com.harium.etyl.ui.base.UIView;
+import com.harium.etyl.ui.listener.OnCheckListener;
 import com.harium.etyl.ui.theme.ThemeManager;
 
 public class CheckBox extends UIView {
@@ -45,12 +46,16 @@ public class CheckBox extends UIView {
         checkbox.setChecked(checked);
     }
 
-    public void setChecker(Label checker) {
-        checkbox.setChecker(checker);
-    }
-
-    public CheckBox checked(boolean checked) {
+    public CheckBox check(boolean checked) {
         setChecked(checked);
         return this;
+    }
+
+    public OnCheckListener getOnCheckListener() {
+        return checkbox.getOnCheckListener();
+    }
+
+    public void setOnCheckListener(OnCheckListener onCheckListener) {
+        checkbox.setOnCheckListener(onCheckListener);
     }
 }

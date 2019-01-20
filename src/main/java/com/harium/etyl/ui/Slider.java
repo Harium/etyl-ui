@@ -2,6 +2,7 @@ package com.harium.etyl.ui;
 
 import com.harium.etyl.ui.base.BaseSlider;
 import com.harium.etyl.ui.base.UIView;
+import com.harium.etyl.ui.listener.OnValueChangeListener;
 import com.harium.etyl.ui.theme.ThemeManager;
 
 public class Slider extends UIView {
@@ -44,6 +45,10 @@ public class Slider extends UIView {
 
     public void setValue(float value) {
         slider.setValue(value);
+    }
+
+    public void setOnValueChangeListener(OnValueChangeListener listener) {
+        slider.setOnValueChangeListener(listener);
     }
 
 }

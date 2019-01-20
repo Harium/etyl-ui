@@ -3,6 +3,7 @@ package com.harium.etyl.ui.base;
 import com.harium.etyl.commons.event.*;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.View;
+import com.harium.etyl.ui.listener.OnValueChangeListener;
 import com.harium.etyl.ui.theme.Theme;
 
 
@@ -15,6 +16,8 @@ public class BaseSlider extends View {
 
     protected float value = 0;
     protected boolean activated = false;
+
+    private OnValueChangeListener onValueChangeListener = NULL_ON_VALUE_CHANGE_LISTENER;
 
     public BaseSlider(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -68,6 +71,8 @@ public class BaseSlider extends View {
         } else {
             sliderPosition = event.getX();
         }
+
+        onValueChangeListener.onValueChange(value);
     }
 
     @Override
@@ -145,5 +150,12 @@ public class BaseSlider extends View {
         sliderPosition = (int) bx;
     }
 
+    public OnValueChangeListener getOnValueChangeListener() {
+        return onValueChangeListener;
+    }
+
+    public void setOnValueChangeListener(OnValueChangeListener onValueChangeListener) {
+        this.onValueChangeListener = onValueChangeListener;
+    }
 }
 
