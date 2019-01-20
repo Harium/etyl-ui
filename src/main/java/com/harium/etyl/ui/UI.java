@@ -525,4 +525,11 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         drawCursor = false;
     }
 
+    public static void setTheme(Theme theme) {
+        ThemeManager.getInstance().setTheme(theme);
+    }
+
+    public static void setArrowTheme(ArrowTheme arrowTheme) {
+        ThemeManager.getInstance().setArrowTheme(arrowTheme);
+    }
 }
