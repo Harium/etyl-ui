@@ -37,7 +37,7 @@ public class BaseTheme extends Theme {
 
 	@Override
 	public BaseSlider createSlider(int x, int y, int w, int h) {
-		BaseSlider slider = new BaseSlider(x, y, w, h);
+		BaseSliderKnobButton slider = new BaseSliderKnobButton(x, y, w, h);
 		return slider;
 	}
 
@@ -65,6 +65,6 @@ public class BaseTheme extends Theme {
 
 	@Override
 	public void loadFonts() {
-
+		fontSize = 14;
 	}
 }
