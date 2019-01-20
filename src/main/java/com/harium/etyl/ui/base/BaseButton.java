@@ -18,6 +18,8 @@ public class BaseButton extends RoundView {
 
     protected Label label;
 
+    protected boolean activated = false;
+
     protected int clicked = UNDEFINED;
 
     protected OnClickListener listener = NULL_ON_CLICK_LISTENER;
@@ -44,8 +46,8 @@ public class BaseButton extends RoundView {
 
         Color color;
 
-        if (!disabled) {
-            if (!mouseOver) {
+        if (!isDisabled()) {
+            if (!isMouseOver()) {
                 color = theme.getBaseColor();
             } else {
                 if (isClicked()) {
@@ -70,8 +72,9 @@ public class BaseButton extends RoundView {
     public void updateEvent(GUIEvent event) {
         executeAction(event);
 
-        if (hasLabel())
+        if (hasLabel()) {
             label.updateEvent(event);
+        }
     }
 
     protected void leftDown() {
@@ -111,95 +114,81 @@ public class BaseButton extends RoundView {
             return value;
         }
 
-        if (!disabled) {
-
-            if (mouseOver) {
-
+        if (!isDisabled()) {
+            if (isMouseOver()) {
                 if (event.getState() == PointerState.PRESSED) {
-
                     if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
-
+                        activated = true;
                         clicked = event.getKey().getCode();
                         leftDown();
 
                         value = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
                     } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-
                         rightDown();
-
                         value = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
-
                     } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
-
                         middleDown();
-
                         value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
                     }
                 } else if (event.getState() == PointerState.DOUBLE_CLICK) {
+                    if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
+                        value = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
+                    } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
+                        value = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
+                    } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
+                        value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
+                    }
+                } else if (event.getState() == PointerState.MOVE) {
+                    justOnMouse();
+                    value = GUIEvent.MOUSE_OVER;
+                }
+
+                if (event.getState() == PointerState.RELEASED) {
 
                     if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
+                        if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
+                            leftUp();
+                            listener.onClick();
+                            clicked = UNDEFINED;
+                        }
 
-                        value = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
-
+                        activated = false;
+                        value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
                     } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
+                        if (clicked == MouseEvent.MOUSE_BUTTON_RIGHT.getCode()) {
+                            rightUp();
+                            clicked = UNDEFINED;
+                        }
 
-                        value = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
-
+                        value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
                     } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
+                        if (clicked == MouseEvent.MOUSE_BUTTON_MIDDLE.getCode()) {
+                            middleUp();
+                            clicked = UNDEFINED;
+                        }
 
-                        value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
-
+                        value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
                     }
-
-                } else if (event.getState() == PointerState.MOVE) {
-
-                    justOnMouse();
-
-                    value = GUIEvent.MOUSE_OVER;
-
                 }
-                // If mouse is not over
+
             } else {
-                if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-                    onFocus = false;
+                if (event.getState() == PointerState.RELEASED) {
+
+                    if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
+                        if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
+                            clicked = UNDEFINED;
+                        }
+
+                        activated = false;
+                        // Prevent execute action
+                        value = GUIEvent.NONE;
+                    }
                 }
             }
-
-            if (event.getState() == PointerState.RELEASED) {
-
-                if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
-
-                    if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
-                        leftUp();
-                        listener.onClick();
-                        clicked = UNDEFINED;
-                    }
-
-                    value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
-
-                } else if (event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-
-                    if (clicked == MouseEvent.MOUSE_BUTTON_RIGHT.getCode()) {
-                        rightUp();
-                        clicked = UNDEFINED;
-                    }
-
-                    value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
-
-                } else if (event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
-
-                    if (clicked == MouseEvent.MOUSE_BUTTON_MIDDLE.getCode()) {
-                        middleUp();
-                        clicked = UNDEFINED;
-                    }
-
-                    value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
-                }
-            }
+            updateEvent(value);
         }
 
-        updateEvent(value);
         return GUIEvent.NONE;
     }
 
