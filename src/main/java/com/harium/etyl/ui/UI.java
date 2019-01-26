@@ -15,7 +15,9 @@ import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.ui.theme.base.BaseArrowTheme;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class UI implements Module, ThemeListener, MouseStateChanger {
     private static UI instance;
@@ -42,7 +44,6 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     // View above Mouse
     public View mouseOver = NULL_VIEW;
-    protected View focusComponent = NULL_VIEW;
     private long mouseOverStart = 0;
 
     // Alt text
@@ -228,13 +229,16 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                 break;
 
             case NEXT_COMPONENT:
-
                 System.out.println("LostFocus");
-
-                //controle.getTeclado().loseFocus();
-                //events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
-
                 view.updateEvent(GUIEvent.LOST_FOCUS);
+
+                View next = view.getNext();
+                if (next == NULL_VIEW) {
+                    next = view.findNext();
+                }
+
+                focus = next;
+                focus.updateEvent(GUIEvent.GAIN_FOCUS);
 
                 break;
 
@@ -365,10 +369,8 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawUIViews(Graphics g) {
-        Iterator<View> componentIterator = views.listIterator();
-
-        while (componentIterator.hasNext()) {
-            View child = componentIterator.next();
+        for (int i = 0; i < views.size(); i++) {
+            View child = views.get(i);
             child.drawWithChildren(g);
             //if (drawAlt) {
             //   Draw child.getAlt();
@@ -506,7 +508,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         return mouseOver != NULL_VIEW;
     }
 
-    private static final View NULL_VIEW = new View() {
+    public static final View NULL_VIEW = new View() {
         @Override
         public GUIEvent updateKeyboard(KeyEvent event) {
             return null;

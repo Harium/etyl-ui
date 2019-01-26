@@ -39,6 +39,8 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
     private static long lastId = 0;
     private long id = generateId();
 
+    protected View next = UI.NULL_VIEW;
+
     public View(int x, int y) {
         super(x, y, 1, 1);
     }
@@ -296,6 +298,14 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 
     public void setAlt(String alt) {
         this.alt = alt;
+    }
+
+    public View getNext() {
+        return next;
+    }
+
+    public void setNext(View next) {
+        this.next = next;
     }
 
     @Override
