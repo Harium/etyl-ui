@@ -189,4 +189,8 @@ public class TextLabel extends Label {
         layer.setStyle(fontStyle);
     }
 
+    @Override
+    public String toString() {
+        return getText();
+    }
 }

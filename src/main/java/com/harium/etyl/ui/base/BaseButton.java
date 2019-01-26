@@ -22,7 +22,7 @@ public class BaseButton extends RoundView {
 
     protected int clicked = UNDEFINED;
 
-    protected OnClickListener listener = NULL_ON_CLICK_LISTENER;
+    protected OnClickListener onClickListener = NULL_ON_CLICK_LISTENER;
 
     public BaseButton(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -149,7 +149,7 @@ public class BaseButton extends RoundView {
                     if (event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
                         if (clicked == MouseEvent.MOUSE_BUTTON_LEFT.getCode()) {
                             leftUp();
-                            listener.onClick();
+                            onClickListener.onClick();
                             clicked = UNDEFINED;
                         }
 
@@ -284,11 +284,11 @@ public class BaseButton extends RoundView {
         clicked = view.clicked;
     }
 
-    public OnClickListener getListener() {
-        return listener;
+    public OnClickListener getOnClickListener() {
+        return onClickListener;
     }
 
-    public void setListener(OnClickListener listener) {
-        this.listener = listener;
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

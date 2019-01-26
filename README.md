@@ -27,8 +27,8 @@ import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.Button;
 import com.harium.etyl.ui.UI;
-import com.harium.etyl.ui.theme.base.BaseArrowTheme;
-import com.harium.etyl.ui.theme.base.BaseTheme;
+import com.harium.etyl.ui.label.TextLabel;
+import com.harium.etyl.ui.listener.OnClickListener;
 
 public class ExampleUI extends Etyl {
 
@@ -44,8 +44,8 @@ public class ExampleUI extends Etyl {
     @Override
     public Application startApplication() {
         // Setup
-        UI.setTheme(new BaseTheme());
-        UI.setArrowTheme(new BaseArrowTheme());
+        /*UI.setTheme(new BaseTheme());
+        UI.setArrowTheme(new BaseArrowTheme());*/
         addModule(UI.getInstance());
         return new UIApplication(w, h);
     }
@@ -58,9 +58,26 @@ public class ExampleUI extends Etyl {
 
         @Override
         public void load() {
-            // Add buttons without label
-            UI.add(new Button(40, 50, 300, 50));
-            UI.add(new Button(40, 120, 300, 50));
+            final Button a = new Button(40, 50, 300, 50);
+            a.setLabel(new TextLabel("Hello"));
+            a.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick() {
+                    System.out.println(a.getLabel().toString());
+                }
+            });
+
+            final Button b = new Button(40, 120, 300, 50);
+            b.setLabel(new TextLabel("Bye"));
+            b.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick() {
+                    System.out.println(b.getLabel().toString());
+                }
+            });
+
+            UI.add(a);
+            UI.add(b);
         }
 
         @Override

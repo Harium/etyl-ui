@@ -48,12 +48,12 @@ public class Button extends UIView {
         button.setCenterLabel(label);
     }
 
-    public OnClickListener getListener() {
-        return button.getListener();
+    public OnClickListener getOnClickListener() {
+        return button.getOnClickListener();
     }
 
-    public void setListener(OnClickListener listener) {
-        button.setListener(listener);
+    public void setOnClickListener(OnClickListener listener) {
+        button.setOnClickListener(listener);
     }
 
 }

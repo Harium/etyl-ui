@@ -13,6 +13,7 @@ import com.harium.etyl.ui.theme.ArrowTheme;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.ui.theme.base.BaseArrowTheme;
+import com.harium.etyl.ui.theme.base.BaseTheme;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
 
 import java.util.ArrayList;
@@ -72,6 +73,8 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         if (instance == null) {
             instance = new UI();
 
+            // Set default theme
+            ThemeManager.getInstance().setTheme(new BaseTheme());
             ThemeManager.getInstance().setArrowThemeListener(instance.arrowDrawer);
             ThemeManager.getInstance().setArrowTheme(instance.arrowTheme);
             ThemeManager.getInstance().setThemeListener(instance);
@@ -263,7 +266,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                 break;
 
             case APPLICATION_CHANGED:
-                //listener.changeApplication();
+                //onClickListener.changeApplication();
                 break;
 
             default:

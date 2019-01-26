@@ -1,5 +1,6 @@
 package com.harium.etyl.ui.theme.base;
 
+import com.harium.etyl.loader.FontLoader;
 import com.harium.etyl.ui.base.*;
 import com.harium.etyl.ui.theme.Theme;
 
@@ -66,6 +67,6 @@ public class BaseTheme extends Theme {
 
     @Override
     public void loadFonts() {
-
+        font = FontLoader.getInstance().getFont("", fontSize);
     }
 }
