@@ -250,7 +250,7 @@ public class BaseTextField extends TextFieldView {
             if (dif > 0) {
                 g.drawLine(cx + 1, y + padding, cx + 1, y + h - padding);
             } else {
-                g.drawLine(dif + cx, y + padding, dif + cx, y + h - padding);
+                g.drawLine((int)dif + cx, y + padding, (int)dif + cx, y + h - padding);
             }
 
         }
@@ -262,11 +262,13 @@ public class BaseTextField extends TextFieldView {
     }
 
     private void drawText(Graphics g, int x, int y, String text) {
-        g.drawStringShadow(text, x, y, getTheme().getShadowColor());
+        g.setColor(getTheme().getShadowColor());
+        g.drawString(text, x, y);
     }
 
     private void drawSelectedText(Graphics g, int x, int y, String text) {
-        g.drawStringShadow(text, x, y, getTheme().getBackgroundColor());
+        g.setColor(getTheme().getBackgroundColor());
+        g.drawString(text, x, y);
     }
 
     @Override

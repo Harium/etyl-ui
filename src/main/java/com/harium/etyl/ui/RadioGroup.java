@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class RadioGroup {
 
+    public static final String DEFAULT_GROUP = "";
     private String name = "";
     private BaseRadioButton checked = null;
     private List<BaseRadioButton> radios = new ArrayList<>();
@@ -133,5 +134,6 @@ public class RadioGroup {
 
     public static void clear() {
         radioGroups.clear();
+        radioGroups.put(DEFAULT_GROUP, new RadioGroup(DEFAULT_GROUP));
     }
 }

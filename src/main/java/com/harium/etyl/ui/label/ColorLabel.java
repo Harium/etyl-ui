@@ -21,10 +21,8 @@ public class ColorLabel extends Label {
 
     @Override
     public void draw(Graphics g) {
-
         g.setColor(color);
-        g.fill3DRect(x, y, w, h, true);
-
+        g.fillRect(x, y, w, h);
     }
 
     public Color getColor() {

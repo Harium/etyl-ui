@@ -89,9 +89,11 @@ public class TextLabel extends Label {
         if (!theme.isShadow()) {
             g.drawString(layer.getText(), bx, by, bw, bh);
         } else {
-            g.drawStringShadow(layer.getText(), bx, by, bw, bh, theme.getShadowColor());
+            g.setColor(theme.getShadowColor());
+            g.drawString(layer.getText(), bx + 1, by + 1, bw, bh);
+            g.setColor(theme.getTextColor());
+            g.drawString(layer.getText(), bx, by, bw, bh);
         }
-
     }
 
     @Override

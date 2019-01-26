@@ -39,7 +39,7 @@ public class ColoredTextPanel extends View {
         g.setColor(backgroundcolor);
         g.fillRect(left(), top(), width(), height());
 
-        g.setFont(g.getFont().deriveFont(fontSize));
+        g.setFontSize(fontSize);
 
         for (int i = 0; i < h / fontSize; i++) {
 

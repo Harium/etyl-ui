@@ -10,6 +10,7 @@ import com.harium.etyl.ui.base.BaseButton;
 import com.harium.etyl.ui.icon.DownArrow;
 import com.harium.etyl.ui.list.Option;
 import com.harium.etyl.ui.listener.OnOptionChangeListener;
+import com.harium.etyl.ui.theme.Theme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,9 @@ public class Select extends View {
         g.setColor(Color.BLACK);
         g.drawRect(x, y, w, h);
 
-        int fontSize = g.getFont().getSize() + 1;
+        Theme theme = getTheme();
+
+        int fontSize = theme.getFontSize() + 1;
         int textOffset = 2;
 
         g.drawString(options.get(selectedOption).getLabel(), x + textOffset, y + fontSize);
@@ -78,7 +81,7 @@ public class Select extends View {
             float finalY = h * (options.size() + 1);
 
             g.setColor(Color.WHITE);
-            g.fillRect(x, initialY, w, finalY);
+            g.fillRect(x, (int)initialY, w, (int)finalY);
 
             g.setColor(Color.BLACK);
             int i = 0;
@@ -90,7 +93,7 @@ public class Select extends View {
             }
 
             g.setColor(Color.BLACK);
-            g.drawRect(x, initialY, w, finalY);
+            g.drawRect(x, (int)initialY, w, (int)finalY);
         }
     }
 

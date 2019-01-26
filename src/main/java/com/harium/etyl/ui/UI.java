@@ -35,7 +35,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public static float timerClickAmount = 0;
 
     // Useful in mobile environment
-    private static boolean drawCursor = true;
+    private static boolean drawCursor = false;
 
     // Arrow
     public ArrowDrawer arrowDrawer;

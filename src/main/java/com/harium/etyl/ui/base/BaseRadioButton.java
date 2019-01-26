@@ -21,6 +21,7 @@ public class BaseRadioButton extends BaseCheckBox {
 
     public BaseRadioButton(int x, int y, int w, int h) {
         super(x, y, w, h);
+        setGroup(RadioGroup.DEFAULT_GROUP);
     }
 
     public BaseRadioButton(int x, int y, String groupName) {

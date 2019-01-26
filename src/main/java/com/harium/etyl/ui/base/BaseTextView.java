@@ -39,7 +39,10 @@ public class BaseTextView extends View {
         if (!getTheme().isShadow()) {
             g.drawString(text, left(), top(), width(), height());
         } else {
-            g.drawStringShadow(text, left(), top(), width(), height(), getTheme().getShadowColor());
+            g.setColor(getTheme().getShadowColor());
+            g.drawString(text, left() + 1, top() + 1, width(), height());
+            g.setColor(getTheme().getTextColor());
+            g.drawString(text, left(), top(), width(), height());
         }
     }
 

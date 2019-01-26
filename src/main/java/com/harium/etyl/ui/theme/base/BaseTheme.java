@@ -67,6 +67,6 @@ public class BaseTheme extends Theme {
 
     @Override
     public void loadFonts() {
-        font = FontLoader.getInstance().getFont("", fontSize);
+        font = FontLoader.getInstance().loadFont("");
     }
 }

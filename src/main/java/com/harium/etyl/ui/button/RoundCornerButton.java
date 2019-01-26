@@ -30,7 +30,8 @@ public class RoundCornerButton extends BaseButton {
             }
         }
 
-        g.fillRoundRect(x, y, w, h, style.roundness.width, style.roundness.height);
+        //g.fillRoundRect(x, y, w, h, style.roundness.width, style.roundness.height);
+        g.fillRect(x, y, w, h);
         drawLabel(g);
     }
 
