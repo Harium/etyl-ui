@@ -65,7 +65,6 @@ public class BaseCheckBox extends BaseButton {
         this.checked = checked;
     }
 
-
     public void copy(BaseCheckBox view) {
         super.copy(view);
         checked = view.checked;

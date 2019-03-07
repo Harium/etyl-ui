@@ -46,6 +46,10 @@ public class RadioButton extends UIView {
         radio.setCenterLabel(label);
     }
 
+    public boolean isChecked() {
+        return radio.isChecked();
+    }
+
     public void setChecked(boolean checked) {
         radio.setChecked(checked);
     }

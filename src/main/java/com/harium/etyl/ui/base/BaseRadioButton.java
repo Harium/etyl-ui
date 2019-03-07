@@ -30,7 +30,7 @@ public class BaseRadioButton extends BaseCheckBox {
     }
 
     @Override
-    protected void leftDown() {
+    protected void leftUp() {
         check();
     }
 
@@ -92,7 +92,7 @@ public class BaseRadioButton extends BaseCheckBox {
 
     @Override
     public boolean isChecked() {
-        return RadioGroup.isChecked(group, this);
+        return checked;
     }
 
     public void check() {
