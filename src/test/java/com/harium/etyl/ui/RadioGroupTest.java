@@ -14,7 +14,7 @@ public class RadioGroupTest {
 
     @Test
     public void testInit() {
-        Assert.assertEquals(0, RadioGroup.radioGroups.size());
+        Assert.assertEquals(1, RadioGroup.radioGroups.size());
     }
 
     @Test
