@@ -26,7 +26,7 @@ public class Select extends View {
     protected boolean multiSelect = false;
 
     protected List<Option> options = new ArrayList<Option>();
-    private OnOptionChangeListener onOptionChangeListener = View.NULL_ON_OPTION_CHANGE_LISTENER;
+    protected OnOptionChangeListener onOptionChangeListener = NULL_ON_OPTION_CHANGE_LISTENER;
 
     public Select(int x, int y, int w, int h) {
         super(x, y, w, h);
@@ -116,4 +116,11 @@ public class Select extends View {
     public void setOnOptionChangeListener(OnOptionChangeListener onOptionChangeListener) {
         this.onOptionChangeListener = onOptionChangeListener;
     }
+
+    protected static final OnOptionChangeListener NULL_ON_OPTION_CHANGE_LISTENER = new OnOptionChangeListener() {
+        @Override
+        public void onOptionChange(String option) {
+
+        }
+    };
 }

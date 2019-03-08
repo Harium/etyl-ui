@@ -402,13 +402,6 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
         }
     };
 
-    protected static final OnOptionChangeListener NULL_ON_OPTION_CHANGE_LISTENER = new OnOptionChangeListener() {
-        @Override
-        public void onOptionChange(String option) {
-
-        }
-    };
-
     protected static final OnClickListener NULL_ON_CLICK_LISTENER = new OnClickListener() {
         @Override
         public void onClick() {
