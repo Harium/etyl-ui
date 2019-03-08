@@ -5,6 +5,7 @@ import com.harium.etyl.commons.graphics.font.FontStyle;
 import com.harium.etyl.core.graphics.Font;
 import com.harium.etyl.i18n.Language;
 import com.harium.etyl.i18n.LanguageChangeListener;
+import com.harium.etyl.ui.base.BaseDivider;
 import com.harium.etyl.ui.style.Style;
 
 import java.util.HashMap;
@@ -290,4 +291,5 @@ public abstract class Theme implements ThemeFactory, LanguageChangeListener {
 
         loadFonts();
     }
+
 }

@@ -44,6 +44,12 @@ public class BaseTheme extends Theme {
     }
 
     @Override
+    public BaseDivider createDivider(int x, int y, int w, int h) {
+        BaseDivider divider = new BaseDivider(x, y, w, h);
+        return divider;
+    }
+
+    @Override
     public BaseTable createTable(int x, int y, int w, int h) {
         BaseTable table = new BaseTable(x, y, w, h);
         return table;

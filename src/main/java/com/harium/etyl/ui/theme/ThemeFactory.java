@@ -23,4 +23,6 @@ public interface ThemeFactory {
     BaseTextView createTextView(int x, int y, int w, int h);
 
     BaseSlider createSlider(int x, int y, int w, int h);
+
+    BaseDivider createDivider(int x, int y, int w, int h);
 }
